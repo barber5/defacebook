@@ -12,7 +12,7 @@
 
   "content_scripts": [
     {
-      "matches": ["*://*.google.com/*"],
+      "matches": ["*://*.facebook.com/*"],
       "js": ["jquery.js", "main.js"]
     }
   ]

@@ -40,18 +40,23 @@ var cur_div = 0;
 window.addEventListener('scroll', function ( event ) {
 	window.clearTimeout(isScrolling);
 
+	var items = document.querySelectorAll('div[id^="hyperfeed"]');
+
 	isScrolling = setTimeout(function() {
 		console.log( 'Scrolling has stopped.' );
-		for (i = cur_div; i < $('div').length; i++) {
-	    	if (isScrolledIntoView($('div')[i])) {	
+		for (i = cur_div; i < items.length; i++) {
+	    	if (isScrolledIntoView(items[i])) {	
 	    		console.log(i);
 	    		cur_div = i;
 	    		break;
 	    	}
 		}
-		if (cur_div > 1000) {
+		if (cur_div > 10) {
 			document.body.style.filter = 'grayscale(100%)';
 		}
 	}, 66);
 
 }, false);
+
+// var items = document.querySelectorAll('div[id^="_hyperfeed_"]');
+// console.log(items.length)
