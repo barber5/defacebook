@@ -4,7 +4,7 @@
   "name": "Main",
   "version": "1.0",
 
-  "description": "Grayscale",
+  "description": "DeFacebook",
 
   "icons": {
     "48": "icons/img.png"
@@ -15,6 +15,12 @@
       "matches": ["*://*.facebook.com/*"],
       "js": ["jquery.js", "main.js"]
     }
-  ]
+  ],
+  "permissions": [
+    "webRequest", "webRequestBlocking", "*://*.facebook.com/*", "*://*.fb.com/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
 
 }
