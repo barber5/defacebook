@@ -1,10 +1,10 @@
 {
 
   "manifest_version": 2,
-  "name": "Main",
+  "name": "DeFacebook",
   "version": "1.0",
 
-  "description": "DeFacebook",
+  "description": "Helping control FB usage",
 
   "icons": {
     "48": "icons/img.png"
