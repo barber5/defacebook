@@ -43,7 +43,7 @@ window.addEventListener('scroll', function ( event ) {
 	var items = document.querySelectorAll('div[id^="hyperfeed"]');
 
 	isScrolling = setTimeout(function() {
-		console.log( 'Scrolling has stopped.' );
+		console.log( 'Scrolling has stopped.' );		
 		for (i = cur_div; i < items.length; i++) {
 	    	if (isScrolledIntoView(items[i])) {	
 	    		console.log(i);
@@ -51,12 +51,29 @@ window.addEventListener('scroll', function ( event ) {
 	    		break;
 	    	}
 		}
+		
 		if (cur_div > 10) {
 			document.body.style.filter = 'grayscale(100%)';
 		}
 	}, 66);
 
 }, false);
+
+window.onscroll = function() {	
+	chrome.runtime.sendMessage({greeting: "bottom_scroll", bottom: 0}, function(response) {
+		  console.log(response.farewell);
+		});
+    var scrollHeight, totalHeight;
+    scrollHeight = document.body.scrollHeight;
+    totalHeight = window.scrollY + window.innerHeight;
+    if(totalHeight >= scrollHeight)
+    {
+    	console.log("bottom reached");
+        chrome.runtime.sendMessage({greeting: "bottom_scroll", bottom: 1}, function(response) {
+		  console.log(response.farewell);
+		});
+    }
+}
 
 // var items = document.querySelectorAll('div[id^="_hyperfeed_"]');
 // console.log(items.length)
