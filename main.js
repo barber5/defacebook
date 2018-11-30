@@ -36,7 +36,7 @@ function isScrolledIntoView(elem)
 
 var isScrolling;
 var cur_div = 0;
-
+var limit_reached = 0;
 window.addEventListener('scroll', function ( event ) {
 	window.clearTimeout(isScrolling);
 
@@ -53,27 +53,18 @@ window.addEventListener('scroll', function ( event ) {
 		}
 		
 		if (cur_div > 10) {
+			if(limit_reached == 0) {
+				chrome.runtime.sendMessage({greeting: "limit_reached"}, function(response) {
+				  console.log("background confirms limited reached");
+				});
+				limit_reached = 1;
+			}
+				
 			document.body.style.filter = 'grayscale(100%)';
 		}
 	}, 66);
 
 }, false);
-
-window.onscroll = function() {	
-	chrome.runtime.sendMessage({greeting: "bottom_scroll", bottom: 0}, function(response) {
-		  console.log(response.farewell);
-		});
-    var scrollHeight, totalHeight;
-    scrollHeight = document.body.scrollHeight;
-    totalHeight = window.scrollY + window.innerHeight;
-    if(totalHeight >= scrollHeight)
-    {
-    	console.log("bottom reached");
-        chrome.runtime.sendMessage({greeting: "bottom_scroll", bottom: 1}, function(response) {
-		  console.log(response.farewell);
-		});
-    }
-}
 
 // var items = document.querySelectorAll('div[id^="_hyperfeed_"]');
 // console.log(items.length)

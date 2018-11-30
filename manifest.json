@@ -17,7 +17,7 @@
     }
   ],
   "permissions": [
-    "activeTab", "webRequest", "webRequestBlocking", "*://*.facebook.com/*", "*://*.fb.com/*", "*://*.fbcdn.net/*"
+    "webRequest", "webRequestBlocking", "*://*.facebook.com/*", "*://*.fb.com/*", "*://*.fbcdn.net/*"
   ],
   "background": {
     "scripts": ["background.js"]
