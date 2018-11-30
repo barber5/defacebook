@@ -13,11 +13,11 @@
   "content_scripts": [
     {
       "matches": ["*://*.facebook.com/*"],
-      "js": ["jquery.js", "main.js"]
+      "js": ["jquery.js", "main.js", "number.js"]
     }
   ],
   "permissions": [
-    "webRequest", "webRequestBlocking", "*://*.facebook.com/*", "*://*.fb.com/*", "*://*.fbcdn.net/*"
+    "webRequest", "webRequestBlocking", "*://*.facebook.com/*", "*://*.fb.com/*", "*://*.fbcdn.net/*", "storage"
   ],
   "background": {
     "scripts": ["background.js"]
