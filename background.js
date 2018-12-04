@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener(
                 "from a content script:" + sender.tab.url :
                 "from the extension");
     if (request.greeting == "limit_reached") {
-    	console.log("limit_reached");
+    	console.log("throttle_level is " + request.level);
     	throttle_level = request.level;
       	sendResponse({farewell: "loading throttled"});
     }

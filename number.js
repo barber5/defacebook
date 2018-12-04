@@ -10,12 +10,7 @@ chrome.storage.local.get({'total_div': 0}, function(item){
 	number.appendChild(number_content);
 	left_nav.appendChild(number);
 	if (item['total_div'] > 10) {
-		if(limit_reached == 0) {
-		chrome.runtime.sendMessage({greeting: "limit_reached"}, function(response) {
-		  console.log("background confirms limited reached");
-		});
-		limit_reached = 1;
-	}
+	
 
 	document.getElementById('pagelet_bluebar').style.filter = 'grayscale(100%)';
 	
@@ -27,6 +22,12 @@ chrome.storage.local.get({'total_div': 0}, function(item){
 
 	document.getElementById('contentCol').style.filter = 'grayscale(100%)';
 	//document.body.style.filter = 'grayscale(100%)';
+	}
+	if(item['total_div'] > 20) {
+		var throttle_level = Math.floor(item['total_div']/5) 	    					
+		chrome.runtime.sendMessage({greeting: "limit_reached", level: throttle_level}, function(response) {
+		  console.log("background confirms throttling");
+		});	
 	}
 });
 

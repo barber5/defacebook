@@ -54,7 +54,7 @@ window.addEventListener('scroll', function ( event ) {
 	    					var throttle_level = Math.floor(new_total_div/5) 
 	    					
 							chrome.runtime.sendMessage({greeting: "limit_reached", level: throttle_level}, function(response) {
-							  console.log("background confirms limited reached");
+							  console.log("background confirms throttling");
 							});															
 	    				}
 	    			});
