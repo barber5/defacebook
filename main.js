@@ -35,7 +35,6 @@ window.addEventListener('scroll', function ( event ) {
 	    		if (cur_div !== i) {
 	    			chrome.storage.local.get({'total_div': 0}, function(item){
 	    				var new_total_div = i - cur_div + item['total_div'];
-	    				//console.log(new_total_div);
 	    				cur_div = i;
 	    				document.getElementById('number_content_seen').innerHTML = new_total_div;
 	    				chrome.storage.local.set({'total_div': new_total_div}, function(){});
@@ -67,6 +66,7 @@ window.addEventListener('scroll', function ( event ) {
 	}, 66);
 
 }, false);
+
 
 // var items = document.querySelectorAll('div[id^="_hyperfeed_"]');
 // console.log(items.length)
