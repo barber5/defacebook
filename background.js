@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener(
     if (request.greeting == "limit_reached") {
     	console.log("limit_reached");
     	limit_reached = 1;
-      	sendResponse({farewell: "goodbye"});
+      	sendResponse({farewell: "loading throttled"});
     }
   });
 
