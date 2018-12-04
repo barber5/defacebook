@@ -1,5 +1,5 @@
 var atBottom = 0;
-var limit_reached = 0;
+var throttle_level = 0;
 
 function sleepFor( sleepDuration ){
     var now = new Date().getTime();
@@ -13,23 +13,22 @@ chrome.runtime.onMessage.addListener(
                 "from the extension");
     if (request.greeting == "limit_reached") {
     	console.log("limit_reached");
-    	limit_reached = 1;
+    	throttle_level = request.level;
       	sendResponse({farewell: "loading throttled"});
     }
   });
 
 chrome.webRequest.onBeforeRequest.addListener(
         function(details) {  
-        	if(limit_reached == 1) {
+        	if(throttle_level > 0) {
         		var url = details.url;
 	        	if(url.search('scontent-ort2') != -1) {
 	        		// sleepFor(50);
 	        	}
 	        	if(url.search('LitestandTailLoadPagelet') != -1) {
-	        		sleepFor(7500);
+	        		sleepFor( (throttle_level+2)*1000 );
 	        	}
-        	}
-	        	
+        	}	        	
         },
         {urls: ["<all_urls>"]},
         ["blocking"]);

@@ -21,7 +21,6 @@ function isScrolledIntoView(elem)
 
 var isScrolling;
 var cur_div = 0;
-var limit_reached = 0;
 window.addEventListener('scroll', function ( event ) {
 	window.clearTimeout(isScrolling);
 
@@ -39,14 +38,7 @@ window.addEventListener('scroll', function ( event ) {
 	    				document.getElementById('number_content_seen').innerHTML = new_total_div;
 	    				chrome.storage.local.set({'total_div': new_total_div}, function(){});
 
-	    				if (new_total_div > 10) {
-	    					if(limit_reached == 0) {
-							chrome.runtime.sendMessage({greeting: "limit_reached"}, function(response) {
-							  console.log("background confirms limited reached");
-							});
-							limit_reached = 1;
-						}
-
+	    				if (new_total_div > 10) {	    					
 						document.getElementById('pagelet_bluebar').style.filter = 'grayscale(100%)'
 						
 						document.getElementById('userNav').style.filter = 'grayscale(100%)'
@@ -57,6 +49,13 @@ window.addEventListener('scroll', function ( event ) {
 
 						document.getElementById('contentCol').style.filter = 'grayscale(100%)'
 						//document.body.style.filter = 'grayscale(100%)';
+	    				} 
+	    				if(new_total_div > 20) {
+	    					var throttle_level = Math.floor(new_total_div/5) 
+	    					
+							chrome.runtime.sendMessage({greeting: "limit_reached", level: throttle_level}, function(response) {
+							  console.log("background confirms limited reached");
+							});															
 	    				}
 	    			});
 	    		}
