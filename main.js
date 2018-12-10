@@ -38,17 +38,22 @@ window.addEventListener('scroll', function ( event ) {
 	    				document.getElementById('number_content_seen').innerHTML = new_total_div;
 	    				chrome.storage.local.set({'total_div': new_total_div}, function(){});
 
-	    				if (new_total_div > 10) {	    					
-						document.getElementById('pagelet_bluebar').style.filter = 'grayscale(100%)'
-						
-						document.getElementById('userNav').style.filter = 'grayscale(100%)'
-						document.getElementById('universalNav').style.filter = 'grayscale(100%)'
-						document.getElementById('pinnedNav').style.filter = 'grayscale(100%)'
-						document.getElementById('appsNav').style.filter = 'grayscale(100%)'
-						document.getElementById('createNav').style.filter = 'grayscale(100%)'
-
-						document.getElementById('contentCol').style.filter = 'grayscale(100%)'
-						//document.body.style.filter = 'grayscale(100%)';
+	    				if (new_total_div > 10) {
+	    					if (document.getElementById('pagelet_bluebar') !== null)
+								document.getElementById('pagelet_bluebar').style.filter = 'grayscale(100%)';
+							if (document.getElementById('userNav') !== null)
+								document.getElementById('userNav').style.filter = 'grayscale(100%)';
+							if (document.getElementById('universalNav') !== null)
+								document.getElementById('universalNav').style.filter = 'grayscale(100%)';
+							if (document.getElementById('pinnedNav') !== null)
+								document.getElementById('pinnedNav').style.filter = 'grayscale(100%)';
+							if (document.getElementById('appsNav') !== null)
+								document.getElementById('appsNav').style.filter = 'grayscale(100%)';
+							if (document.getElementById('createNav') !== null)
+								document.getElementById('createNav').style.filter = 'grayscale(100%)';
+							if (document.getElementById('contentCol') !== null)
+								document.getElementById('contentCol').style.filter = 'grayscale(100%)';
+							//document.body.style.filter = 'grayscale(100%)';
 	    				} 
 	    				if(new_total_div > 20) {
 	    					var throttle_level = Math.floor(new_total_div/5) 
