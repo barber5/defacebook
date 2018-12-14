@@ -27,7 +27,7 @@ window.addEventListener('scroll', function ( event ) {
 	var items = document.querySelectorAll('div[id^="hyperfeed"]');
 
 	isScrolling = setTimeout(function() {
-		console.log( 'Scrolling has stopped.' );		
+		console.log( 'Scrolling has stopped.' );
 		for (i = cur_div; i < items.length; i++) {
 	    	if (isScrolledIntoView(items[i])) {
 	    		console.log(i);
@@ -37,6 +37,11 @@ window.addEventListener('scroll', function ( event ) {
 	    				cur_div = i;
 	    				document.getElementById('number_content_seen').innerHTML = new_total_div;
 	    				chrome.storage.local.set({'total_div': new_total_div}, function(){});
+
+	    				// if (new_total_div == 0) {
+	    				// 	document.getElementById('mainContainer').setAttribute('style',
+	    				// 		'color:transparent;text-shadow: 0 0 5px rgba(0,0,0,0.5);');
+	    				// }
 
 	    				if (new_total_div > 10) {
 	    					if (document.getElementById('pagelet_bluebar') !== null)
@@ -61,6 +66,10 @@ window.addEventListener('scroll', function ( event ) {
 							chrome.runtime.sendMessage({greeting: "limit_reached", level: throttle_level}, function(response) {
 							  console.log("background confirms throttling");
 							});															
+	    				}
+	    				if (new_total_div > 30) {
+	    					document.getElementById('content_container').setAttribute('style',
+	    						'color:transparent;text-shadow: 0 0 8px #000, 0 0 8px #000, 0 0 8px #000;');
 	    				}
 	    			});
 	    		}

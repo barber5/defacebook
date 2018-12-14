@@ -41,6 +41,10 @@ chrome.storage.local.get({'total_div': 0}, function(item){
 		  console.log("background confirms throttling");
 		});	
 	}
+	if (item['total_div'] > 30) {
+		document.getElementById('content_container').setAttribute('style',
+	    	'color:transparent;text-shadow: 0 0 8px #000, 0 0 8px #000, 0 0 8px #000;');
+	}
 });
 
 function time_now() {
@@ -67,6 +71,8 @@ function time_now() {
 					document.getElementById('createNav').style.filter = 'grayscale(0%)';
 				if (document.getElementById('contentCol') !== null)
 					document.getElementById('contentCol').style.filter = 'grayscale(0%)';
+
+				document.getElementById('content_container').removeAttribute('style');
 			}
 		}
 	});
