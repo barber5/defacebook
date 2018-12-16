@@ -18,6 +18,13 @@ chrome.storage.local.get({'total_div': 0}, function(item){
 	var number_content = document.createTextNode(item['total_div']);
 	number.appendChild(number_content);
 	left_nav.appendChild(number);
+	if(new_total_div < 10) {
+		var throttle_level = 0
+		chrome.runtime.sendMessage({greeting: "limit_reached", level: throttle_level}, function(response) {
+		  console.log("background confirms un-throttling");
+		});	
+
+	}
 	if (item['total_div'] > 10) {
 		if (document.getElementById('pagelet_bluebar') !== null)   					
 			document.getElementById('pagelet_bluebar').style.filter = 'grayscale(100%)';
@@ -56,6 +63,11 @@ function time_now() {
 				console.log('reset');
 				chrome.storage.local.set({'total_div': 0}, function(){});
 				document.getElementById('number_content_seen').innerHTML = 0;
+
+				var throttle_level = 0
+				chrome.runtime.sendMessage({greeting: "limit_reached", level: throttle_level}, function(response) {
+				  console.log("background confirms un-throttling");
+				});	
 
 				if (document.getElementById('pagelet_bluebar') !== null)
 					document.getElementById('pagelet_bluebar').style.filter = 'grayscale(0%)';

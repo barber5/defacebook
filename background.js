@@ -26,7 +26,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 	        		// sleepFor(50);
 	        	}
 	        	if(url.search('LitestandTailLoadPagelet') != -1) {
-	        		sleepFor( (throttle_level+2)*1000 );
+	        		sleepFor( (throttle_level+10)*1000 );
 	        	}
         	}	        	
         },

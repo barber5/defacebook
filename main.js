@@ -42,7 +42,13 @@ window.addEventListener('scroll', function ( event ) {
 	    				// 	document.getElementById('mainContainer').setAttribute('style',
 	    				// 		'color:transparent;text-shadow: 0 0 5px rgba(0,0,0,0.5);');
 	    				// }
+	    				if(new_total_div < 10) {
+	    					throttle_level = 0
+	    					chrome.runtime.sendMessage({greeting: "limit_reached", level: throttle_level}, function(response) {
+							  console.log("background confirms un-throttling");
+							});	
 
+	    				}
 	    				if (new_total_div > 10) {
 	    					if (document.getElementById('pagelet_bluebar') !== null)
 								document.getElementById('pagelet_bluebar').style.filter = 'grayscale(100%)';
