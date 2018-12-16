@@ -13,6 +13,11 @@ number.setAttribute('id', 'number_content_seen');
 number.setAttribute('style',
 	'color:red;font-size:300%;text-align:center;position:relative;top:5px;left:3px');
 
+var throttle_level = 0
+chrome.runtime.sendMessage({greeting: "limit_reached", level: throttle_level}, function(response) {
+  console.log("background confirms un-throttling");
+});	
+
 chrome.storage.local.get({'total_div': 0}, function(item){
 	console.log('number.js');
 	var number_content = document.createTextNode(item['total_div']);
