@@ -3,7 +3,7 @@ let left_nav = document.getElementById('left_nav_section_nodes');
 let instruction = document.createElement('div');
 instruction.setAttribute('id', 'number_content_instruction');
 instruction.setAttribute('style',
-	'position:relative;top:5px;left:3px');
+	'color:red;position:relative;top:5px;left:3px');
 let instr_text = document.createTextNode('Number of posts you have seen: ');
 instruction.appendChild(instr_text);
 left_nav.appendChild(instruction);
@@ -11,7 +11,7 @@ left_nav.appendChild(instruction);
 let number = document.createElement('div');
 number.setAttribute('id', 'number_content_seen');
 number.setAttribute('style',
-	'color:red;font-size:300%;text-align:center;position:relative;top:5px;left:3px');
+	'color:red;font-size:200%;text-align:center;position:relative;top:5px;left:3px');
 
 var throttle_level = 0
 chrome.runtime.sendMessage({greeting: "limit_reached", level: throttle_level}, function(response) {
@@ -58,13 +58,24 @@ chrome.storage.local.get({'total_div': 0}, function(item){
 	    	'color:transparent;text-shadow: 0 0 8px #000, 0 0 8px #000, 0 0 8px #000;');
 	}
 });
-
+var time_d = 6000;
 function time_now() {
 	console.log('main.js: timer_now');
+
 	chrome.storage.local.get({'last_time': 0}, function(item){
 		if (item['last_time'] !== 0) {
 			var now = new Date().getTime();
-			if (now - item['last_time'] > 6000) {
+
+    chrome.storage.local.get('time_d', function (result) {
+        time_d = result.time_d * 1000;
+        console.log(time_d)
+
+    });
+            console.log('time def')
+            console.log(time_d)
+            //console.log(item['time_d']*1000);
+            var timer = time_d * 1000
+			if (now - item['last_time'] > time_d) {
 				console.log('reset');
 				chrome.storage.local.set({'total_div': 0}, function(){});
 				document.getElementById('number_content_seen').innerHTML = 0;

@@ -5,6 +5,7 @@
   "version": "1.0",
 
   "description": "Helping control FB usage",
+  "options_page": "options.html",
 
   "icons": {
     "48": "icons/img.png"
@@ -19,6 +20,9 @@
   "permissions": [
     "webRequest", "webRequestBlocking", "*://*.facebook.com/*", "*://*.fb.com/*", "*://*.fbcdn.net/*", "storage"
   ],
+  "page_action": {
+      "default_popup": "popup.html"
+  },
   "background": {
     "scripts": ["background.js"]
   }
